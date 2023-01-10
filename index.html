@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="node_modules/@telekom/scale-components/dist/scale-components/scale-components.css"
+    />
+    <script
+      type="module"
+      src="node_modules/@telekom/scale-components/dist/scale-components/scale-components.esm.js"
+    ></script>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Vanilla</title>
+  </head>
+  <body>
+    <div class="container" id="container">
+      <h1>Scale + Vanilla</h1>
+      <scale-tooltip content="Container" id="tooltip-container">
+        <div class="tooltip-container">
+          <scale-tooltip content="Tooltip" id="nested-tooltip" placement="right">
+            <scale-button>Hover me</scale-button>
+          </scale-tooltip>
+        </div> 
+      </scale-tooltip>
+    </div>
+    <script>
+      const container = document.getElementById('container')
+      const ttcontainer = document.getElementById("tooltip-container");
+      container.addEventListener('scale-before-show', (event) => { if (event.target.id === 'tooltip-container') {console.log('showing parent', event.target.id)}})
+      container.addEventListener('scale-before-show', (event) => {
+         if (event.target.id === 'nested-tooltip') {
+          console.log('showing child', event.target.id);   
+          ttcontainer.opened = false;
+          }
+        })
+  
+  
+    </script>
+
+  </body>
+
+</html>
